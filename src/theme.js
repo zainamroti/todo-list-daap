@@ -17,11 +17,20 @@ const theme = createMuiTheme({
       default: '#fff',
     },
   },
+  appbar: {
+    alignItems: 'center',
+  },
+  button: {
+    color: red,
+    position: 'absolute', 
+    left: '50%', top: '50%',
+  },
   container: {
     styleOverrides: {
       backgroundColor: red,
        margin: '40rem',
-       height: '300rem'
+       height: '300rem',
+       width: '300rem'
     }
   }
 });

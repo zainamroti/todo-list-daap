@@ -2,7 +2,8 @@ import styles from '../../styles/Home.module.css';
 import React from 'react'
 
 export default function Footer() {
-    return <footer className={styles.footer}>
+    return <React.Fragment>
+      <footer className={styles.footer}>
     <a
       href="https://syedzainjeelani.github.io/cv"
       target="_blank"
@@ -10,5 +11,6 @@ export default function Footer() {
     >
       Created by{' Syed Zain Jeelani'}
     </a>
-  </footer>;
+  </footer>
+    </React.Fragment>;
 };
