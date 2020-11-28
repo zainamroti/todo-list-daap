@@ -2,10 +2,9 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import Header from './components/header.js'
 import Footer from './components/footer.js'
-import React from 'react'
-import { Container} from '@material-ui/core'
+import * as React from 'react'
+import { Container, Button} from '@material-ui/core'
 import TextInput from './components/textinput.js'
-import { red } from '@material-ui/core/colors'
 
 export default function Home() {
   return (
@@ -18,8 +17,9 @@ export default function Home() {
       <Header> </Header>
       <main className={styles.main}>
       <div >
-       <Container  maxWidth="lg">
+       <Container variant="contained" maxWidth="lg" styles={{alignItems: 'center', justifyContent: 'center'}}>
          <TextInput />
+         <Button variant="contained" >Add Item</Button>
        </Container>
       </div>
       </main>
