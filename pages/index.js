@@ -1,13 +1,25 @@
-import styles from '../styles/Home.module.css'
-import React from 'react'
-import { Container, Button} from '@material-ui/core'
+import React, {useState} from 'react'
+import { Container} from '@material-ui/core'
 import TextForm from './components/textform.jsx'
+import TodoItems from './components/todoitems'
 
 
 export default function Home() {
-  return (
+  const [todos, setTodos] = useState(["This is First Todo"])
+
+  function addTodo(item) {
+    console.log(`Item received: ${item}`)
+    setTodos((prevState) => {
+       return [...prevState, item]
+    })
+  }
+
+  return (<React.Fragment>
        <Container variant="contained" maxWidth="sm">
-         <TextForm />
+         <TextForm addTodo={addTodo}/>
+         <TodoItems todoList={todos}/>
        </Container>
+  </React.Fragment>
+
   );
 }
