@@ -8,7 +8,7 @@ const styles = {
   root: {
     display: '100%',
     flex: 1,
-    height: '50rem',
+    // height: '10rem',
   },
    button: { 
     position: 'absolute', 
@@ -27,25 +27,27 @@ function TextForm(props) {
     return <React.Fragment>
     <div className={classes.root}>
       <form noValidate autoComplete="off" onSubmit={submitItem}>
-         <Box sx={{ flex:2, flexDirection:"row", my:1}}>
-          <Box sx={{ py:5, pl:5, pr:17, position:"absolute", width:"520px",
-           bgcolor:"pink", display:"inline"}}>
-          <TextField
-          fullWidth={true}
-          id="filled-tf"
-          label="Enter Todo Item"
-          variant="filled"
-          color="secondary"
-        />
-          </Box>
-          <Box sx={{ my:3, position:"relative", left:"395px", top:"45px",
-            bgcolor:"pink", display:"inline"}}>
-            <Button size="large"
-              variant="contained" 
-              type="submit"
-              >
-              Add Item
-            </Button>
+         <Box sx={{py:3,my:1, display:"flex", justifyContent:"center",  bgcolor:"pink"}}>
+            <Box sx={{ 
+              // position:"relative", display:"inline"
+              width:"22rem"
+              }}>
+            <TextField
+            fullWidth={true}
+            id="filled-tf"
+            label="Enter Todo Item"
+            variant="filled"
+            color="secondary"/>
+         </Box>
+          <Box sx={{
+            mt:1, ml:2
+            // color:"red", position:"relative", display:"inline"
+            }}>
+              <Button size="large"
+                variant="contained" 
+                type="submit">
+                Add Item
+              </Button>
           </Box>
         </Box>
 
