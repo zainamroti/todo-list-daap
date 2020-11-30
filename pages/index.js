@@ -21,9 +21,9 @@ export default function Home() {
   }
 
   const editTodo = (todo, editIndex) => {
-    setNewTodo({ [todo]: { todo }, index: editIndex })
+    setNewTodo({ "todo": todo, "index": editIndex })
     console.log(`Printing up sent todo=> ${newTodo.todo}`)
-    console.log(`Printing up sent Normal todo=> ${todo}`)
+    // console.log(`Printing up sent Normal todo=> ${todo}`)
   }
 
   return (<React.Fragment>

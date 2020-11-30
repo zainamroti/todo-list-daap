@@ -22,9 +22,10 @@ function TextForm(props) {
 
   function submitItem(e) {
     console.log(`Item == ${todoText}`)
+
     if (todoText.length !== 0) {
       addTodo(todoText);
-
+    } else if (newTodo.todo === todoText) {
     }
 
     e.preventDefault();
@@ -33,8 +34,9 @@ function TextForm(props) {
 
   function updateTodo() {
 
-    if (newTodo !== null && newTodo.todo !== "") {
-      // setTodoText(newTodo.todo)
+    if (newTodo.todo !== "") {
+      setTodoText(newTodo.todo)
+      newTodo.todo = "";
     }
 
     return "Update";
@@ -49,7 +51,6 @@ function TextForm(props) {
           <TextField
             onChange={(e) => {
               const { value } = e.target;
-              console.log(value)
               setTodoText(value)
             }}
             value={todoText}
@@ -67,7 +68,7 @@ function TextForm(props) {
             variant="contained"
             fullWidth={true}
             type="submit">
-            {newTodo !== null && newTodo.todo === "" ? "Add" : "Update"}
+            {newTodo !== null && newTodo.index === -1 ? "Add" : updateTodo()}
           </Button>
         </Box>
       </Box>
