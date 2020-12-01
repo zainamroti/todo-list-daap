@@ -17,17 +17,20 @@ import PropTypes from "prop-types"
 // }
 
 function TextForm(props) {
-  const { addTodo, newTodo } = props;
+  const { addTodo, newTodo, update } = props;
   const [todoText, setTodoText] = useState("")
+  var shouldAdd = (newTodo !== null && newTodo.index === -1)
 
   function submitItem(e) {
     console.log(`Item == ${todoText}`)
 
     if (todoText.length !== 0) {
-      addTodo(todoText);
-    } else if (newTodo.todo === todoText) {
+      if (shouldAdd) {
+        addTodo(todoText);
+      } else {
+        update(todoText, newTodo.index)
+      }
     }
-
     e.preventDefault();
     setTodoText("")
   }
@@ -68,7 +71,7 @@ function TextForm(props) {
             variant="contained"
             fullWidth={true}
             type="submit">
-            {newTodo !== null && newTodo.index === -1 ? "Add" : updateTodo()}
+            {shouldAdd ? "Add" : updateTodo()}
           </Button>
         </Box>
       </Box>

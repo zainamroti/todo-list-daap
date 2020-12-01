@@ -26,9 +26,13 @@ export default function Home() {
     // console.log(`Printing up sent Normal todo=> ${todo}`)
   }
 
+  const update = (newTodo, editIndex) => {
+
+  }
+
   return (<React.Fragment>
     <Container variant="contained" maxWidth="sm">
-      <TextForm addTodo={addTodo} newTodo={newTodo} />
+      <TextForm addTodo={addTodo} newTodo={newTodo} update={update} />
       <TodoItems todoList={todos} deleteTodo={deleteTodo} editTodo={editTodo} />
       <Box sx={{ height: "20rem" }} />
     </Container>
