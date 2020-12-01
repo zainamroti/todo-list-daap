@@ -5,11 +5,10 @@ import TodoItems from './components/todoitems'
 
 
 export default function Home() {
-  const [todos, setTodos] = useState(["This is First Todo"])
+  const [todos, setTodos] = useState([])
   const [newTodo, setNewTodo] = useState({ todo: "", index: -1 })
 
   function addTodo(item) {
-    // console.log(`Item received: ${item}`)
     setTodos((prevState) => {
       return [...prevState, item]
     })
@@ -22,7 +21,6 @@ export default function Home() {
 
   const editTodo = (todo, editIndex) => {
     setNewTodo({ "todo": todo, "index": editIndex })
-    // console.log(`Printing up sent todo=> ${newTodo.todo}`)
   }
 
   const update = (newTodo, editIndex) => {
