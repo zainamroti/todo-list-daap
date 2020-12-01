@@ -22,7 +22,7 @@ export default function MyApp(props) {
   return (
     <React.Fragment>
       <Head>
-      <title>Todo List</title>
+        <title>Todo List</title>
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
         <link rel="icon" href="https://www.flaticon.com/svg/static/icons/svg/3014/3014777.svg" />
       </Head>
@@ -30,9 +30,9 @@ export default function MyApp(props) {
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
         {/* <h1>HELOOOOOOO</h1> */}
-      <Header> </Header>
+        <Header theme={theme}> </Header>
         <Component {...pageProps} />
-      <Footer></Footer>
+        <Footer></Footer>
       </ThemeProvider>
     </React.Fragment>
   );

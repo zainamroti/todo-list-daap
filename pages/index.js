@@ -38,8 +38,10 @@ export default function Home() {
 
   return (<React.Fragment>
     <Container variant="contained" maxWidth="sm">
-      <TextForm addTodo={addTodo} newTodo={newTodo} update={update} />
-      <TodoItems todoList={todos} deleteTodo={deleteTodo} editTodo={editTodo} />
+      <Box sx={{ mt: 1.5, border: 2, borderColor: "#fc8621" }} >
+        <TextForm addTodo={addTodo} newTodo={newTodo} update={update} />
+        <TodoItems todoList={todos} deleteTodo={deleteTodo} editTodo={editTodo} />
+      </Box>
       <Box sx={{ height: "20rem" }} />
     </Container>
   </React.Fragment>

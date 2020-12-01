@@ -23,7 +23,7 @@ function TodoItems(props) {
 
 
     return (
-        <Box sx={{ px: 2, py: 1, position: "relative", height: "70%", display: "block", bgcolor: "yellow", }}>
+        <Box sx={{ px: 2, py: 1, position: "relative", height: "70%", display: "block", bgcolor: "pink", }}>
             <List>
                 {todoList.map((todo, index) => {
                     const labelId = `checkbox-list-label-${todo}`;

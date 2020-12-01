@@ -32,7 +32,7 @@ function TextForm(props) {
 
   return <React.Fragment>
     <form noValidate autoComplete="off" onSubmit={submitItem}>
-      <Box sx={{ px: 2, pt: 3, pb: 1, mt: 1, display: "flex", flexWrap: "nowrap", justifyContent: "center", bgcolor: "pink" }}>
+      <Box sx={{ px: 2, pt: 3, pb: 1, display: "flex", flexWrap: "nowrap", justifyContent: "center", bgcolor: "pink" }}>
         <Box sx={{
           width: "85%"
         }}>
