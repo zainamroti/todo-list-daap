@@ -1,20 +1,5 @@
 import React, { useState } from 'react'
-import { TextField, Button, withStyles, Box } from "@material-ui/core"
-import PropTypes from "prop-types"
-// import { compose, spacing, palette } from '@material-ui/system';
-// const Box = styled('div')(compose(spacing, palette));
-
-// const styles = {
-//   // root: {
-//   //   display: '100%',
-//   //   flex: 1,
-//   //   // height: '10rem',
-//   // },
-//    button: { 
-//     position: 'absolute', 
-//     left: '50%', 
-//     top: '50%',}
-// }
+import { TextField, Button, Box } from "@material-ui/core"
 
 function TextForm(props) {
   const { addTodo, newTodo, update } = props;
@@ -22,13 +7,13 @@ function TextForm(props) {
   var shouldAdd = (newTodo !== null && newTodo.index === -1)
 
   function submitItem(e) {
-    console.log(`Item == ${todoText}`)
 
     if (todoText.length !== 0) {
       if (shouldAdd) {
         addTodo(todoText);
       } else {
         update(todoText, newTodo.index)
+        newTodo.index = -1;
       }
     }
     e.preventDefault();
@@ -37,7 +22,7 @@ function TextForm(props) {
 
   function updateTodo() {
 
-    if (newTodo.todo !== "") {
+    if (newTodo !== null && newTodo.todo !== "") {
       setTodoText(newTodo.todo)
       newTodo.todo = "";
     }
@@ -79,9 +64,4 @@ function TextForm(props) {
   </React.Fragment>;
 }
 
-// TextForm.propTypes = {
-//   classes: PropTypes.object.isRequired,
-// };
-
-// export default withStyles(styles)(TextForm);
 export default (TextForm);

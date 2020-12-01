@@ -9,7 +9,7 @@ export default function Home() {
   const [newTodo, setNewTodo] = useState({ todo: "", index: -1 })
 
   function addTodo(item) {
-    console.log(`Item received: ${item}`)
+    // console.log(`Item received: ${item}`)
     setTodos((prevState) => {
       return [...prevState, item]
     })
@@ -22,12 +22,18 @@ export default function Home() {
 
   const editTodo = (todo, editIndex) => {
     setNewTodo({ "todo": todo, "index": editIndex })
-    console.log(`Printing up sent todo=> ${newTodo.todo}`)
-    // console.log(`Printing up sent Normal todo=> ${todo}`)
+    // console.log(`Printing up sent todo=> ${newTodo.todo}`)
   }
 
   const update = (newTodo, editIndex) => {
-
+    console.log(newTodo, editIndex)
+    const newList = todos.map((val, index) => {
+      if (index === editIndex) {
+        return newTodo;
+      }
+      return val;
+    })
+    setTodos(newList)
   }
 
   return (<React.Fragment>

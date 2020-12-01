@@ -26,7 +26,6 @@ function TodoItems(props) {
         <Box sx={{ px: 2, py: 1, position: "relative", height: "70%", display: "block", bgcolor: "yellow", }}>
             <List>
                 {todoList.map((todo, index) => {
-                    console.log(todo);
                     const labelId = `checkbox-list-label-${todo}`;
                     return <ListItem key={todo + index} dense
                         button onClick={handleToggle(todo)}>
