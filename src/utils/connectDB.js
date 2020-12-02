@@ -14,4 +14,3 @@ async function connectToDB() {
 }
 
 export default connectToDB;
-// export { isConnected };
