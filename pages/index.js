@@ -2,11 +2,32 @@ import React, { useState } from 'react'
 import { Container, Box } from '@material-ui/core'
 import TextForm from '../src/components/textform.jsx'
 import TodoItems from '../src/components/todoitems'
+// import { useRouter } from 'next/router'
+import useSWR from 'swr'
 
+const fetcher = async (url) => {
+  const res = await fetch(url)
+  const data = await res.json()
+
+  if (res.status !== 200) {
+    throw new Error(data.message)
+  }
+  return data
+}
 
 export default function Home() {
   const [todos, setTodos] = useState([])
   const [newTodo, setNewTodo] = useState({ todo: "", index: -1 })
+  // const { query } = useRouter()
+  const { data, error } = useSWR(
+    () => `/api/todos/`,
+    fetcher
+  )
+
+  if (error) return <div>{error.message}</div>
+  if (!data) return <div>Loading...</div>
+
+
 
   function addTodo(item) {
     setTodos((prevState) => {

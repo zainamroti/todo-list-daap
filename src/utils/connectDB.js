@@ -1,12 +1,17 @@
 import mongoose from "mongoose"
 
-mongoose.connect('mongodb://localhost/todo', { useNewUrlParser: true });
 
-const db = mongoose.connection;
-db.on('error', (err) => console.log('connection error: ', err));
-db.once('open', function () {
-    // we're connected!
-    console.log("Connected");
-});
+async function connectToDB() {
+    mongoose.connect(process.env.MONGO_URI,
+        { useNewUrlParser: true, useUnifiedTopology: true })
 
-export default db;
+    const db = mongoose.connection;
+    db.on('error', (err) => { console.log('connection error: ', err); });
+    db.once('open', () => {
+        // we're connected!
+        console.log("We're Connected");
+    });
+}
+
+export default connectToDB;
+// export { isConnected };
