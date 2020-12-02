@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from '../src/theme';
-import Header from './components/header.jsx'
-import Footer from './components/footer.jsx'
+import Header from '../src/components/header.jsx'
+import Footer from '../src/components/footer.jsx'
 import Head from 'next/head';
 
 export default function MyApp(props) {

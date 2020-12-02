@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Container, Box } from '@material-ui/core'
-import TextForm from './components/textform.jsx'
-import TodoItems from './components/todoitems'
+import TextForm from '../src/components/textform.jsx'
+import TodoItems from '../src/components/todoitems'
 
 
 export default function Home() {
