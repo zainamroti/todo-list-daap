@@ -2,68 +2,47 @@ import React, { useState } from 'react'
 import { Container, Box } from '@material-ui/core'
 import TextForm from '../src/components/textform.jsx'
 import TodoItems from '../src/components/todoitems'
-// import { useRouter } from 'next/router'
-import useSWR from 'swr'
-// import apiRoute from "api/todos/"
-
-
-// const fetcher = async (url) => {
-//   //making a Get request with the fetch API
-//   const res = await fetch(url, {
-//     method: 'GET',
-//     headers: {
-//       'Accept': 'application/json',
-//       'Content-Type': 'application/json'
-//     },
-//   })
-
-//   const data = await res.json()
-//   console.log(`Got Data fetched...: ${data}`)
-
-//   if (res.status !== 200) {
-//     throw new Error(`${res.status}, Could not fetch data at: ${url}`)
-//   }
-//   // console.log(`Got data fetched...: ${data}`)
-//   return data
-// }
+import connectToDB, { isConnected } from '../src/utils/connectDB.js'
+import Todo from '../src/Model/todo.js'
 
 export async function getServerSideProps() {
-  //making a Get request with the fetch API
-  const res = await fetch(`http://localhost:3000/api/todos/`, {
-    method: 'GET',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-  })
-  // const res = await apiRoute();
-  console.log(`Got RESPONSE fetched...: ${res.toString()}`)
+  //this method runs on server side on every request (refresh)
 
-  const data = await res.json();
-  console.log(`Got Data fetched...: ${data}`)
 
-  // console.log(`Got data fetched...: ${data}`)
-  // return data
+  if (isConnected == 0) {
+    //Connect to database
+    console.log("Not Connected, Trying to connect to DB")
+    //getting data directly from database.
+    await connectToDB();
+  }
+
+  //Read All Todos from database.
+  const todos = await Todo.find({})  //list of all todos
+  //Have to stringigy and Parse Todo items List from DB as it may contain undefined elements  
+  const parsedData = JSON.parse(JSON.stringify(todos))
+  console.log("Got the data from DB...", parsedData)
+
+  // const todos = await Todo.deleteMany({}, (err) => console.log(`DB Delete error: ${err}`))  //list of all todos
+  // console.log("Deleted the data from DB...", todos)
+
+
   return {
     props: {
-      [data]: data,
-      status: res.status,
+      data: parsedData,
     },
   };
 }
 
 export default function Home(props) {
-  // const { query } = useRouter()
-  // const { data, error } = useSWR(
-  //   () => `api/todos`,
-  //   fetcher
-  // )
-  const { data, status } = props
-  const [todos, setTodos] = useState([data])
+
+  const { data } = props
+  const todoList = data.map(todo => todo.text)
+  console.log(todoList)
+  const [todos, setTodos] = useState(todoList)
   const [newTodo, setNewTodo] = useState({ todo: "", index: -1 })
 
 
-  if ((status !== 200)) return <div>{`${status}, Could not fetch data`}</div>
+  if ((data === null)) return <div>{`Could not Read data from DB`}</div>
   if (!data) return <div>Loading...</div>
 
   function addTodo(item) {
@@ -88,9 +67,9 @@ export default function Home(props) {
     })
   }
 
-  function readTodos() {
-    console.log(data)
-  }
+  // function readTodos() {
+  //   console.log(data)
+  // }
 
   const update = (newTodo, editIndex) => {
     console.log(newTodo, editIndex)
@@ -113,10 +92,10 @@ export default function Home(props) {
   }
 
   return (<React.Fragment>
-    <Container variant="contained" maxWidth="sm">
-      <Box sx={{ mt: 1.5, border: 2, borderColor: "#fc8621" }} >
+    <Container variant="contained" maxWidth="lg">
+      <Box sx={{ mt: 1.5, border: 2.5, borderColor: "#e05297" }} >
         <TextForm addTodo={addTodo} newTodo={newTodo} update={update} />
-        <TodoItems todoList={todos} deleteTodo={deleteTodo} editTodo={editTodo} />
+        <TodoItems todoList={todos} deleteTodo={deleteTodo} editTodo={editTodo} data={data} />
       </Box>
       <Box sx={{ height: "20rem" }} />
     </Container>
