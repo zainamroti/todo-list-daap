@@ -34,6 +34,10 @@ export default async function apiRoute(req, res) {
       res.json({ UpdateSuccess: "true", [updatedTodo]: JSON.stringify(updatedTodo) })
       break;
     case 'DELETE':
+      const body = req.body;
+      await Todo.deleteOne({ text: body.text, }, (err) => err && (console.log(err)))
+      console.log(`Got a DEL Req, DELETED ${body.text}`)
+      res.json({ DeleteSuccess: "true" })
       break;
   }
 }

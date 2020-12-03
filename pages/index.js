@@ -20,11 +20,7 @@ export async function getServerSideProps() {
   const todos = await Todo.find({})  //list of all todos
   //Have to stringigy and Parse Todo items List from DB as it may contain undefined elements  
   const parsedData = JSON.parse(JSON.stringify(todos))
-  console.log("Got the data from DB...", parsedData)
-
-  // const todos = await Todo.deleteMany({}, (err) => console.log(`DB Delete error: ${err}`))  //list of all todos
-  // console.log("Deleted the data from DB...", todos)
-
+  // console.log("Got the data from DB...", parsedData)
 
   return {
     props: {
@@ -37,7 +33,6 @@ export default function Home(props) {
 
   const { data } = props
   const todoList = data.map(todo => todo.text)
-  console.log(todoList)
   const [todos, setTodos] = useState(todoList)
   const [newTodo, setNewTodo] = useState({ todo: "", index: -1 })
 
@@ -67,14 +62,8 @@ export default function Home(props) {
     })
   }
 
-  // function readTodos() {
-  //   console.log(data)
-  // }
-
   const update = (oldTodo, newTodo, editIndex) => {
-    console.log(newTodo, editIndex)
     //Update todo on DB using PUT method.
-    console.log(`${oldTodo}, ${newTodo}`)
     fetch('/api/todos', {
       method: 'PUT',
       headers: {
@@ -96,6 +85,20 @@ export default function Home(props) {
   }
 
   const deleteTodo = (delIndex) => {
+    //Delete item on DB with DELETE request
+    fetch('/api/todos', {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        text: todos[delIndex],
+      })
+    }).then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.log(error))
+    //Delete on Frontend
     const newList = todos.filter((val, index) => index !== delIndex)
     setTodos(newList)
   }
@@ -114,6 +117,5 @@ export default function Home(props) {
       <Box sx={{ height: "20rem" }} />
     </Container>
   </React.Fragment>
-
   );
 }
