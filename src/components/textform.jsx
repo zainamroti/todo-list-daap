@@ -12,7 +12,7 @@ function TextForm(props) {
       if (shouldAdd) {
         addTodo(todoText);
       } else {
-        update(todoText, newTodo.index)
+        update(newTodo.oldTodo, todoText, newTodo.index)
         newTodo.index = -1;
       }
     }

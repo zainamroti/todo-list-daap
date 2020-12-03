@@ -23,10 +23,15 @@ export default async function apiRoute(req, res) {
     case 'PUT':
       const data = req.body;
       // let updateErr = false;
-      const updatedTodo = await Todo.updateOne({ text: data.text, }, { isChecked: data.isChecked }, (err) => err && (console.log(err)))
-      console.log(`Got a Put Req, Updated Todo: ${data.text, data.isChecked}`)
+      if (!data.oldText) {
+        var updatedTodo = await Todo.updateOne({ text: data.text, }, { isChecked: data.isChecked }, (err) => err && (console.log(err)))
+        console.log(`Got a CheckUPdate Put Req, Updated Todo: ${data.text, data.isChecked}`)
+      } else {
+        var updatedTodo = await Todo.updateOne({ text: data.oldText, }, { text: data.text }, (err) => err && (console.log(err)))
+        console.log(`Got a TUPdate Put Req, Updated Todo: ${data.oldText, data.isChecked}`)
+      }
       // updateErr ? res.json({ UpdateError: "true" }) : res.json({ UpdateSuccess: "true" })
-      res.json({ UpdateSuccess: "true", [updatedTodo]: updatedTodo })
+      res.json({ UpdateSuccess: "true", [updatedTodo]: JSON.stringify(updatedTodo) })
       break;
     case 'DELETE':
       break;

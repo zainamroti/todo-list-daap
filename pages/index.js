@@ -71,15 +71,28 @@ export default function Home(props) {
   //   console.log(data)
   // }
 
-  const update = (newTodo, editIndex) => {
+  const update = (oldTodo, newTodo, editIndex) => {
     console.log(newTodo, editIndex)
-    const newList = todos.map((val, index) => {
-      if (index === editIndex) {
-        return newTodo;
-      }
-      return val;
-    })
-    setTodos(newList)
+    //Update todo on DB using PUT method.
+    console.log(`${oldTodo}, ${newTodo}`)
+    fetch('/api/todos', {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        oldText: oldTodo,
+        text: newTodo,
+        isChecked: false,
+      })
+    }).then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.log(error))
+
+    todos.splice(editIndex, 0, newTodo);
+    setTodos([...todos]);
+
   }
 
   const deleteTodo = (delIndex) => {
@@ -88,7 +101,8 @@ export default function Home(props) {
   }
 
   const editTodo = (todo, editIndex) => {
-    setNewTodo({ "todo": todo, "index": editIndex })
+    setNewTodo({ "todo": todo, "index": editIndex, "oldTodo": todos[editIndex] })
+    setTodos(todos.filter((todo, index) => index !== editIndex))
   }
 
   return (<React.Fragment>
