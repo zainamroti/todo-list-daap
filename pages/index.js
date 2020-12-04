@@ -3,7 +3,7 @@ import { Container, Box } from '@material-ui/core'
 import TextForm from '../src/components/textform.jsx'
 import TodoItems from '../src/components/todoitems'
 import connectToDB from '../src/utils/connectDB.js'
-import Todo from '../src/model/todo.js'
+import Todo from '../src/Model/Todo.js'
 
 export async function getServerSideProps() {
   //this method runs on server side on every request (refresh)

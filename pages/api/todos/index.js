@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import connectToDB from "../../../src/utils/connectDB.js"
-import Todo from "../../../src/model/todo.js"
+import Todo from "../../../src/Model/Todo.js"
 
 connectToDB()
 
