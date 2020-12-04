@@ -2,22 +2,16 @@ import React, { useState } from 'react'
 import { Container, Box } from '@material-ui/core'
 import TextForm from '../src/components/textform.jsx'
 import TodoItems from '../src/components/todoitems'
-import connectToDB, { isConnected } from '../src/utils/connectDB.js'
-import Todo from '../src/Model/todo.js'
+import connectToDB from '../src/utils/connectDB.js'
+import Todo from '../src/model/todo.js'
 
 export async function getServerSideProps() {
   //this method runs on server side on every request (refresh)
 
-
-  if (isConnected == 0) {
-    //Connect to database
-    console.log("Not Connected, Trying to connect to DB")
-    //getting data directly from database.
-    await connectToDB();
-  }
-
+  await connectToDB();
   //Read All Todos from database.
   const todos = await Todo.find({})  //list of all todos
+  // const todos = ["Fake Todos"]
   //Have to stringigy and Parse Todo items List from DB as it may contain undefined elements  
   const parsedData = JSON.parse(JSON.stringify(todos))
   // console.log("Got the data from DB...", parsedData)
@@ -53,7 +47,7 @@ export default function Home(props) {
         isChecked: false,
       })
     }).then(response => response.json())
-      .then(data => console.log(data))
+      .then(data => console.log(`Data: ${data}`))
       .catch(error => console.log(error))
 
 
