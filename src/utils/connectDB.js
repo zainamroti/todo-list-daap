@@ -11,6 +11,8 @@ async function connectToDB() {
         {
             useNewUrlParser: true,
             useUnifiedTopology: true,
+            socketTimeoutMS: 300000,
+            connectTimeoutMS: 300000,
         })
     const dbConn = mongoose.connection;
     // isConnected = dbConn.readyState;
