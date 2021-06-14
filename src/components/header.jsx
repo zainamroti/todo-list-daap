@@ -22,7 +22,7 @@ function Header() {
                 </Toolbar>
             </AppBar>
             <h1 className={classes.title} >
-                Hello Next.js!
+                Hello React.js!
             </h1>
         </div>
     </React.Fragment>;
