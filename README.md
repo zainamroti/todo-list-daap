@@ -1,4 +1,4 @@
-## Todo-list App with React (Next.js)
+## Todo-list DApp with React (Next.js)
 
 To learn and understand the working of a complete Full stack DApp ( Decentralized App) using next.js as a react frontend framework, and solidity, hardhat, chai, openzeppelin contracts & alchemy ++ for smart contract development.
 
